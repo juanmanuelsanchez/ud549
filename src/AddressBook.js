@@ -1,7 +1,7 @@
 function AddressBook () {
 
   this.contacts=[];
-  var self=this;
+  var self= this;
 
 
   AddressBook.prototype.addContact= function(newContact) {

@@ -1,9 +1,9 @@
-function Contact(name, telephone, address) {
+function Contact(defaults) {
 
-  this.name=null;
-  this.telephone=null;
-  this.address=null;
-
+  defaults=defaults || {};
+  this.name=defaults.name ||"Mark";
+  this.telephone=defaults.telephone ||67890;
+  this.address=defaults.address ||"Madrid";
 
 
 
