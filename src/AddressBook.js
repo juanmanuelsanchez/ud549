@@ -1,23 +1,44 @@
 function AddressBook () {
 
   this.contacts=[];
-  var self= this;
+  //AddressBook.prototype.contacts=[];
+  this.initialComplete=false;
 
 
+  AddressBook.prototype.getInitialContacts= function(cb) {
+
+    var self= this;
+
+    setTimeout(function() {
+
+      self.initialComplete=true;
+
+      if(cb) {
+
+        return cb();
+      }
+    }, 3);
+
+  };
   AddressBook.prototype.addContact= function(newContact) {
 
 
-    self.contacts.push(newContact);
+    this.contacts.push(newContact);
 
 
   };
 
-  AddressBook.prototype.getContact= function(value){
+  AddressBook.prototype.getContact= function(index){
 
 
-    return self.contacts[value];
+    return this.contacts[index];
 
   };
+
+  AddressBook.prototype.deleteContact= function(index) {
+
+    this.contacts.splice(index, 1);
+  }
 
 
 }

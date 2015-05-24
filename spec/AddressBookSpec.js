@@ -1,22 +1,60 @@
 describe ('Address Book', function(){
 
-  it('Should be able to add a Contact', function(){
+  var addressBook,
+      newContact;
 
-    var addressBook= new AddressBook();
-    this.newContact= new Contact({
+
+  beforeEach(function() {
+
+    addressBook= new AddressBook();
+    newContact= new Contact({
       name: "John",
       telephone: 45637,
       address: "Louisville"
     });
-    addressBook.addContact(this.newContact);
 
-    expect(addressBook.getContact(0)).toBe(this.newContact);
-    !expect(this.newContact.name).not.toBeUndefined();
-    expect(this.newContact.name).toEqual("John");
-    expect(this.newContact.address).toMatch(/Louisville/);
-    expect(this.newContact.address).not.toMatch(/Tac/);
+  });
+
+  it('Should be able to add a Contact', function(){
+
+    addressBook.addContact(newContact);
+
+    expect(addressBook.getContact(0)).toBe(newContact);
+    expect(newContact.name).not.toBeUndefined();
+    expect(newContact.name).toEqual("John");
+    expect(newContact.address).toMatch(/Louisville/);
+    expect(newContact.address).not.toMatch(/Tac/);
 
 
+  });
+
+  it('Should be able to delete a contact', function() {
+
+    addressBook.addContact(newContact);
+    addressBook.deleteContact(0);
+
+    expect(addressBook.getContact(0)).not.toBeDefined();
+
+  });
+
+});
+
+describe('Async Address Book', function() {
+
+  var addressBook= new AddressBook();
+
+  beforeEach(function(done) {
+
+    addressBook.getInitialContacts(function() {
+      done();
+
+    });
+  });
+
+  it('Should grab initial contacts', function(done) {
+
+    expect(addressBook.initialComplete).toBe(true);
+    done();
   });
 
 });
